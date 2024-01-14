@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+#app {
+  text-align: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #333;
+}
+
+input  {
+  padding: 8px;
+  margin: 8px;
+  width: 60%;
+  
+}
+
+button {
+  padding: 8px 16px;
+  margin: 8px;
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li[type="text"]{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border-bottom: 1px solid #353030;
+}
+.completed{
+  text-decoration:line-through;
+  color:#777;
+}
+
+button {
+  background-color: #ff6347;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor:pointer;
+}
+  </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>To-Do List</h1>
+      <input type="text" id="taskInput" placeholder="Add a new task...">
+      <button onclick="addTask()">Add</button>
+      <ul id="taskList"></ul>
+    </div>
+  <script>
+function addTask() {
+  const taskInput = document.getElementById("taskInput");
+  const taskList = document.getElementById("taskList");
+
+  if (taskInput.value.trim() !== "") {
+    const newTask = document.createElement("li");
+    newTask.textContent = taskInput.value;
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.onclick = function () {
+      taskList.removeChild(newTask);
+    };
+
+    const completeButton = document.createElement("button");
+    completeButton.textContent = "Complete";
+    completeButton.onclick = function () {
+      newTask.classList.toggle("completed");
+    };
+
+    newTask.appendChild(deleteButton);
+    newTask.appendChild(completeButton);
+    taskList.appendChild(newTask);
+
+    taskInput.value="";
+}
+}
+  </script>
+</body>
+</html>
